@@ -17,9 +17,9 @@
     "license": "MIT",
     "homepage": "https://github.com/columbusinteractive/typo3-easycaptcha",
     "keywords": [
+        "typo3",
         "captcha",
-        "form",
-        "spam"
+        "spam-protection"
     ],
     "authors": [
         {
