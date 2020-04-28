@@ -1,8 +1,8 @@
 # TYPO3 - Easy Captcha (image based)
-[![Latest Stable Version](https://poser.pugx.org/columbusinteractive/easycaptcha/v/stable)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![Monthly Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/d/monthly)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![Total Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/downloads)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![License](https://poser.pugx.org/columbusinteractive/easycaptcha/license.svg)](https://packagist.org/packages/columbusinteractive/easycaptcha)
+[![Latest Stable Version](https://poser.pugx.org/columbusinteractive/easycaptcha/v/stable?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
+[![Monthly Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/d/monthly?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
+[![Total Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/downloads?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
+[![License](https://poser.pugx.org/columbusinteractive/easycaptcha/license.svg?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
  
 An easy to use extension which enables you to use captchas in the TYPO3 form extension or in your 
 custom extension without the need for 3rd party services

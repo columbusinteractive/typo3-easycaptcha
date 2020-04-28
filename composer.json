@@ -15,7 +15,7 @@
         "codeception/codeception": "^4.1"
     },
     "license": "MIT",
-    "homepage": "",
+    "homepage": "https://github.com/columbusinteractive/typo3-easycaptcha",
     "keywords": [
         "captcha",
         "form",
@@ -31,7 +31,7 @@
     ],
     "support": {
         "email": "hello@columbus-interactive.de",
-        "source": ""
+        "source": "https://github.com/columbusinteractive/typo3-easycaptcha"
     },
     "autoload": {
         "psr-4": {
