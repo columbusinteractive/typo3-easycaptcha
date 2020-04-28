@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-24T08:00:00Z" product-name="easycaptcha">
+		<header/>
+		<body>
+			<trans-unit id="formEditor.elements.easycaptcha.label" xml:space="preserve">
+				<source>Easy captcha</source>
+			</trans-unit>
+			<trans-unit id="formEditor.elements.FormElement.editor.easycaptchaValidator.label" xml:space="preserve">
+				<source>Easy captcha validation is active</source>
+			</trans-unit>
+			<trans-unit id="formEditor.elements.easycaptcha.imageWidth" xml:space="preserve">
+				<source>Width of the captcha image</source>
+			</trans-unit>
+			<trans-unit id="formEditor.elements.easycaptcha.imageHeight" xml:space="preserve">
+                <source>Height of the captcha image</source>
+            </trans-unit>
+            <trans-unit id="formEditor.elements.easycaptcha.lineNoiseLevel" xml:space="preserve">
+                <source>Line noise level (affects how many lines are drawn on the captcha)</source>
+            </trans-unit>
+            <trans-unit id="formEditor.elements.easycaptcha.dotNoiseLevel" xml:space="preserve">
+                <source>Dot noise level (affects how many dots are drawn on the captcha)</source>
+            </trans-unit>
+            <trans-unit id="formEditor.elements.easycaptcha.wordLength" xml:space="preserve">
+                <source>Length of the generated word</source>
+            </trans-unit>
+            <trans-unit id="formEditor.elements.easycaptcha.fontSize" xml:space="preserve">
+                <source>Font size (affects the size of the word)</source>
+            </trans-unit>
+            <trans-unit id="formEditor.elements.easycaptcha.enableTts" xml:space="preserve">
+                <source>Enable TTS (text-to-speech) functionality.</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

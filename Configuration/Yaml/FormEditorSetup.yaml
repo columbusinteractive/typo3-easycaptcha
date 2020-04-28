@@ -1,0 +1,98 @@
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formEditor:
+            dynamicRequireJsModules:
+              additionalViewModelModules:
+                - 'TYPO3/CMS/Easycaptcha/Backend/FormEditor/EasycaptchaViewModel'
+
+            formEditorPartials:
+              FormElement-Easycaptcha: 'Stage/SimpleTemplate'
+
+          formElementsDefinition:
+            Easycaptcha:
+              __inheritances:
+                10: 'TYPO3.CMS.Form.mixins.formElementMixins.EasyCaptchaMixin'
+              formEditor:
+                label: 'formEditor.elements.easycaptcha.label'
+                group: custom
+                groupSorting: 700
+                iconIdentifier: 't3-form-icon-easycaptcha'
+                predefinedDefaults:
+                  validators:
+                    - identifier: 'Easycaptcha'
+                  properties:
+                    width: 300
+                    height: 100
+                    lineNoiseLevel: 20
+                    dotNoiseLevel: 100
+                    wordLength: 5
+                    fontSize: 25
+                    enableTts: 'true'
+                editors:
+                  310:
+                    identifier: 'width'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.imageWidth'
+                    propertyPath: 'properties.width'
+                    propertyValidators:
+                      10: 'Integer'
+                  320:
+                    identifier: 'height'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.imageHeight'
+                    propertyPath: 'properties.height'
+                    propertyValidators:
+                      10: 'Integer'
+                  330:
+                    identifier: 'lineNoiseLevel'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.lineNoiseLevel'
+                    propertyPath: 'properties.lineNoiseLevel'
+                    propertyValidators:
+                      10: 'Integer'
+                  340:
+                    identifier: 'dotNoiseLevel'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.dotNoiseLevel'
+                    propertyPath: 'properties.dotNoiseLevel'
+                    propertyValidators:
+                      10: 'Integer'
+                  350:
+                    identifier: 'wordLength'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.wordLength'
+                    propertyPath: 'properties.wordLength'
+                    propertyValidators:
+                      10: 'Integer'
+                  360:
+                    identifier: 'fontSize'
+                    templateName: 'Inspector-TextEditor'
+                    label: 'formEditor.elements.easycaptcha.fontSize'
+                    propertyPath: 'properties.fontSize'
+                    propertyValidators:
+                      10: 'Integer'
+                  370:
+                    identifier: 'enableTts'
+                    templateName: 'Inspector-CheckboxEditor'
+                    label: 'formEditor.elements.easycaptcha.enableTts'
+                    propertyPath: 'properties.enableTts'
+                  800: null
+
+      mixins:
+        formElementMixins:
+          EasyCaptchaMixin:
+            __inheritances:
+              10: 'TYPO3.CMS.Form.mixins.formElementMixins.FormElementMixin'
+            formEditor:
+              editors:
+                900:
+                  identifier: 'validators'
+                  templateName: 'Inspector-ValidatorsEditor'
+                  label: 'formEditor.elements.FormElement.editor.easycaptchaValidator.label'
+                  selectOptions:
+                    180:
+                      value: 'Easycaptcha'
+                      label: 'formEditor.elements.TextMixin.validators.easycaptcha.editor.header.label'

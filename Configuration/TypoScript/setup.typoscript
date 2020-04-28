@@ -1,0 +1,3 @@
+# add settings for EXT:form
+plugin.tx_form.settings.yamlConfigurations.1982 = EXT:easycaptcha/Configuration/Yaml/BaseSetup.yaml
+plugin.tx_form.view.partialRootPaths.1982 = EXT:easycaptcha/Resources/Private/Frontend/Partials/

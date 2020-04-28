@@ -1,0 +1,19 @@
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                partialRootPaths:
+                  1982: 'EXT:easycaptcha/Resources/Private/Frontend/Partials/'
+
+            Easycaptcha:
+              implementationClassName: 'ColumbusInteractive\EasyCaptcha\Domain\Model\FormElements\EasyCaptcha'
+              properties:
+                containerClassAttribute: 'easycaptcha'
+
+          validatorsDefinition:
+            Easycaptcha:
+              implementationClassName: 'ColumbusInteractive\EasyCaptcha\Validation\Validator\EasyCaptcha'
