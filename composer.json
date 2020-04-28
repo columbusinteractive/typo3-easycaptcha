@@ -1,11 +1,12 @@
 {
     "name": "columbusinteractive/easycaptcha",
-    "description": "An easy to use extension which enables you to use captchas in the TYPO3 form extension or in your custom extension or form without the need for 3rd party services",
+    "description": "A TYPO3 extension which enables you to use captchas in the TYPO3 form extension or in your custom extension or form without the need for 3rd party services",
     "type": "typo3-cms-extension",
     "require": {
         "ext-gd": "*",
         "php": "^7.2",
         "typo3/cms-core": "^9.5 || ^10.4",
+        "typo3/cms-form": "^9.5 || ^10.4",
         "laminas/laminas-captcha": "^2.9",
         "laminas/laminas-validator": "^2.13.0",
         "laminas/laminas-session": "^2.9.0"
