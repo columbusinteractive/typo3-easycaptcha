@@ -8,7 +8,7 @@
         <f:format.raw>
             <easyCaptcha:render/>
             <div class="{element.properties.containerClassAttribute}">
-                <img alt="{captchaImageAltAttribute}" src="{captchaImage}"/>
+                <img id="captcha-image" alt="{captchaImageAltAttribute}" src="{captchaImage}?pid={currentPid}&identifier={element.identifier}"/>
             </div>
             <div class="captcha-actions">
                 <f:if condition="{element.properties.enableTts} == true">
@@ -16,7 +16,7 @@
                         <core:icon identifier="actions-play" size="small"/>
                     </button>
                 </f:if>
-                <button type="submit" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}">
+                <button id="refresh-button" type="button" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}">
                     <core:icon identifier="actions-refresh" size="small"/>
                 </button>
             </div>
@@ -39,26 +39,31 @@
                 margin-top: 10px;
             }
         </style>
-        <f:if condition="{element.properties.enableTts} == true">
-            <script type="application/javascript">
-                if (window.speechSynthesis !== undefined) {
-                    (async function () {
-                        let synth = window.speechSynthesis;
-                        document.getElementById('tts-play').addEventListener('click', async function (e) {
-                            let response = await fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>');
 
-                            if (response.ok) {
-                                let json = await response.json();
-                                let utterance = new SpeechSynthesisUtterance(json.word);
-                                utterance.rate = 0.8;
-                                utterance.pitch = 1;
-                                synth.speak(utterance);
-                            }
-                        });
-                    })();
-                }
-            </script>
-        </f:if>
+        <script async="async" type="application/javascript">
+            if (window.speechSynthesis !== undefined) {
+                (async function () {
+                    let synth = window.speechSynthesis;
+                    document.getElementById('tts-play').addEventListener('click', async function (e) {
+                        let response = await fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>');
+
+                        if (response.ok) {
+                            let json = await response.json();
+                            let utterance = new SpeechSynthesisUtterance(json.word);
+                            utterance.rate = 0.8;
+                            utterance.pitch = 1;
+                            synth.speak(utterance);
+                        }
+                    });
+                })();
+            }
+
+            (async function() {
+                document.getElementById('refresh-button').addEventListener('click', async function (e) {
+                    document.getElementById('captcha-image').src=document.getElementById('captcha-image').src + '&t=' + +new Date();
+                });
+            })();
+        </script>
     </f:render>
 </formvh:renderRenderable>
 </html>

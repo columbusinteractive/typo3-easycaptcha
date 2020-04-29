@@ -72,25 +72,9 @@ final class Captcha
         return $path;
     }
 
-    /**
-     * @param array[mixed] $properties
-     */
-    public function setCaptchaProperties(array $properties): void
-    {
-        $this->getCaptcha()->getSession()->{self::SESSION_KEY} = $properties;
-    }
-
     public function getCaptcha(): Image
     {
         return $this->captcha;
-    }
-
-    /**
-     * @return array[string]
-     */
-    public function getCaptchaProperties(): array
-    {
-        return $this->getCaptcha()->getSession()->{self::SESSION_KEY};
     }
 
     public function getDynamicImagePublicPath(): string
