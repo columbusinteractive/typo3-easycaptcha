@@ -1,5 +1,5 @@
 {
-    "name": "columbusinteractive/easycaptcha",
+    "name": "columbusinteractive/typo3-easycaptcha",
     "description": "A TYPO3 extension which enables you to use captchas in the TYPO3 form extension or in your custom extension or form without the need for 3rd party services",
     "type": "typo3-cms-extension",
     "require": {

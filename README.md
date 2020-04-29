@@ -1,15 +1,15 @@
 # TYPO3 - Easy Captcha (image based)
-[![Latest Stable Version](https://poser.pugx.org/columbusinteractive/easycaptcha/v/stable?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![Monthly Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/d/monthly?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![Total Downloads](https://poser.pugx.org/columbusinteractive/easycaptcha/downloads?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
-[![License](https://poser.pugx.org/columbusinteractive/easycaptcha/license.svg?v1)](https://packagist.org/packages/columbusinteractive/easycaptcha)
+[![Latest Stable Version](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/v/stable)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
+[![Monthly Downloads](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/d/monthly)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
+[![Total Downloads](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/downloads)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
+[![License](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/license.svg)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
  
 An easy to use extension which enables you to use captchas in the TYPO3 form extension or in your 
 custom extension without the need for 3rd party services
 
 ## Installation via Composer
 ```shell
-composer require columbusinteractive/easycaptcha
+composer require columbusinteractive/typo3-easycaptcha
 ```
 
 ## How it works
@@ -36,7 +36,7 @@ The following options are available in the TYPO3 form editor:
 ## Styling
 The captcha field can be styled with the following CSS classes:
 * easycaptcha (Container for the image)
-* captcha-actions (Container for the action buttons e.g. reload of play)
+* captcha-actions (Container for the action buttons e.g. reload or play)
 
 By default, bootstrap classes are also added for the form field. If you don't use bootstrap, simply ignore them.
 
