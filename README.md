@@ -20,7 +20,7 @@ Generated captcha images are automatically gargabe collected from time to time, 
 
 ## Usage
 After you've installed the extension, you will see a new field called "Easy captcha" in your TYPO3 forms editor. 
-Simply add the field and you are good to go. 
+Simply add the field and you are good to go. Don't forget to add the static typoscript file in your template!
 
 ## Customization
 The following options are available in the TYPO3 form editor:
