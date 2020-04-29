@@ -11,6 +11,14 @@
                 <source>The entered value does not match, please try again.</source>
                 <target>Der eingegebene Wert stimmt nicht überein, bitte versuchen Sie es erneut.</target>
             </trans-unit>
+            <trans-unit id="playButton" xml:space="preserve">
+                <source>Play the generated word.</source>
+                <target>Das generierte Word abspielen</target>
+            </trans-unit>
+            <trans-unit id="refreshButton" xml:space="preserve">
+                <source>Generate a new captcha image.</source>
+                <target>Neues Captcha generieren</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
