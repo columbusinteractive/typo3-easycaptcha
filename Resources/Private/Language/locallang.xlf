@@ -9,6 +9,12 @@
 			<trans-unit id="captchaError" xml:space="preserve">
 				<source>The entered value does not match, please try again.</source>
 			</trans-unit>
+			<trans-unit id="playButton" xml:space="preserve">
+				<source>Play the generated word.</source>
+			</trans-unit>
+			<trans-unit id="refreshButton" xml:space="preserve">
+                <source>Generate a new captcha image.</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

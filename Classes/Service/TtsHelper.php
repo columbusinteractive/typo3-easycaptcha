@@ -16,6 +16,6 @@ call_user_func(static function () {
 
     header('Content-Type: application/json');
     echo json_encode([
-        'word' => $captcha->getCaptcha()->getWord()
+        'word' => implode(' ', str_split($captcha->getCaptcha()->getWord()))
     ]);
 });

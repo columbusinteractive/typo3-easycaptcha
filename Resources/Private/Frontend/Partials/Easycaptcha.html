@@ -12,11 +12,11 @@
             </div>
             <div class="captcha-actions">
                 <f:if condition="{element.properties.enableTts} == true">
-                    <button id="tts-play" type="button">
+                    <button id="tts-play" type="button" title="{f:translate(key: 'playButton', extensionName: 'easycaptcha')}">
                         <core:icon identifier="actions-play" size="small"/>
                     </button>
                 </f:if>
-                <button type="submit">
+                <button type="submit" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}">
                     <core:icon identifier="actions-refresh" size="small"/>
                 </button>
             </div>
