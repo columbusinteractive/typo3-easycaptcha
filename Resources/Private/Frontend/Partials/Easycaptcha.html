@@ -40,28 +40,37 @@
             }
         </style>
 
-        <script async="async" type="application/javascript">
-            if (window.speechSynthesis !== undefined) {
-                (async function () {
-                    let synth = window.speechSynthesis;
-                    document.getElementById('tts-play').addEventListener('click', async function (e) {
-                        let response = await fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>');
+        <script type="application/javascript">
+            (function() {
+                var captcha_challenge = document.getElementById('captcha-image');
+                var captcha_challenge_url = captcha_challenge.src;
 
-                        if (response.ok) {
-                            let json = await response.json();
-                            let utterance = new SpeechSynthesisUtterance(json.word);
-                            utterance.rate = 0.8;
-                            utterance.pitch = 1;
-                            synth.speak(utterance);
-                        }
-                    });
-                })();
-            }
-
-            (async function() {
-                document.getElementById('refresh-button').addEventListener('click', async function (e) {
-                    document.getElementById('captcha-image').src=document.getElementById('captcha-image').src + '&t=' + +new Date();
+                var refresh_button = document.getElementById('refresh-button');
+                refresh_button.addEventListener('click', function () {
+                    captcha_challenge.src = captcha_challenge_url + '&t=' + new Date();
                 });
+
+                var tts_button = document.getElementById('tts-play');
+                if (window.speechSynthesis !== undefined && window.fetch !== undefined) {
+                    tts_button.addEventListener('click', function () {
+                        fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>')
+                            .then(function (response) {
+                                if (! response.ok) {
+                                    var error = new Error('HTTP error [' + response.status + '] in easycaptcha-request');
+                                    console.log(error, response);
+                                    throw error;
+                                }
+
+                                return response.json();
+                            })
+                            .then(function (data) {
+                                let utterance = new SpeechSynthesisUtterance(data.word);
+                                utterance.rate = 0.8;
+                                utterance.pitch = 1;
+                                window.speechSynthesis.speak(utterance);
+                            });
+                    });
+                }
             })();
         </script>
     </f:render>
