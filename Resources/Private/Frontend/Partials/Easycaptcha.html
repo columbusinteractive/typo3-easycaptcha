@@ -47,7 +47,7 @@
 
                 var refresh_button = document.getElementById('refresh-button');
                 refresh_button.addEventListener('click', function () {
-                    captcha_challenge.src = captcha_challenge_url + '&t=' + new Date();
+                    captcha_challenge.src = captcha_challenge_url + '&t=' + new Date().getTime();
                 });
 
                 var tts_button = document.getElementById('tts-play');
