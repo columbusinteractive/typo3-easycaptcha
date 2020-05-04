@@ -51,7 +51,7 @@
                 });
 
                 var tts_button = document.getElementById('tts-play');
-                if (window.speechSynthesis !== undefined && window.fetch !== undefined) {
+                if (window.speechSynthesis && window.SpeechSynthesisUtterance && window.fetch) {
                     tts_button.addEventListener('click', function () {
                         fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>')
                             .then(function (response) {
@@ -64,7 +64,7 @@
                                 return response.json();
                             })
                             .then(function (data) {
-                                let utterance = new SpeechSynthesisUtterance(data.word);
+                                let utterance = new window.SpeechSynthesisUtterance(data.word);
                                 utterance.rate = 0.8;
                                 utterance.pitch = 1;
                                 window.speechSynthesis.speak(utterance);
