@@ -12,6 +12,8 @@ custom extension without the need for 3rd party services
 composer require columbusinteractive/typo3-easycaptcha
 ```
 
+**This extension currently works only in composer mode!**
+
 ## How it works
 Under the hood this extension makes use of the fantastic ``laminas/laminas-captcha`` library. This extension
 is using a separated session container to make things easier. A separate session cookie named ``captcha`` is set 
