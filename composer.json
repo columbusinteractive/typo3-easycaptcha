@@ -45,6 +45,10 @@
         }
     },
     "scripts" : {
-        "extension-build": "@composer install -d Resources/Private/Php/Composer"
+        "extension-build": [
+            "composer global require helhum/ter-client",
+            "@composer install -d Resources/Private/Php/Composer",
+            "#/home/www/.composer/vendor/bin/ter-client upload easycaptcha ./ -u $USERNAME -p  $password -m $VERSION"
+        ]
     }
 }
