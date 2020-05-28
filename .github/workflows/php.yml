@@ -1,10 +1,12 @@
 name: CI
 
 on:
+  release:
+    types: [published]
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - '*' # Push events to matching v*, i.e. v1.0, v20.15.10
     branches: [ master ]
   pull_request:
     branches: [ master ]
@@ -20,6 +22,10 @@ jobs:
           - 7.2
     runs-on: ubuntu-latest
     steps:
+    - shell: bash
+      env:
+        TER_LOGIN: ${{ secrets.TER_LOGIN }}
+        TER_PASSWORD: ${{ secrets.TER_PASSWORD }}
     - uses: actions/checkout@v2
     - name: Validate composer.json and composer.lock
       run: composer validate
@@ -36,6 +42,11 @@ jobs:
     - name: Install dependencies
       # if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer extension-build
+
+    - name: Upload to TER
+      run: |
+        composer require helhum/ter-client
+        composer ter-client upload easycaptcha . -u "$TER_LOGIN" -p "$TER_PASSWORD"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
