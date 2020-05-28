@@ -23,4 +23,11 @@ module.tx_form.settings.yamlConfigurations {
     1982 = EXT:easycaptcha/Configuration/Yaml/BaseSetup.yaml
     1983 = EXT:easycaptcha/Configuration/Yaml/FormEditorSetup.yaml
 }');
+
+    $isComposerMode = defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE;
+    if(!$isComposerMode) {
+        // we load the autoloader for our libraries
+        $dir = ExtensionManagementUtility::extPath('easycaptcha');
+        require $dir . '/Resources/Private/Php/Composer/vendor/autoload.php';
+    }
 })();

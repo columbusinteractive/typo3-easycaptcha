@@ -1,0 +1,14 @@
+{
+    "config": {
+        "platform": {
+            "php": "7.2"
+        },
+        "classmap-authoritative": true,
+        "prepend-autoloader": false
+    },
+    "require": {
+        "laminas/laminas-captcha": "^2.9",
+        "laminas/laminas-validator": "^2.13.0",
+        "laminas/laminas-session": "^2.9.0"
+    }
+}

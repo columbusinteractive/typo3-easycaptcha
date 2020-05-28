@@ -43,5 +43,8 @@
         "typo3/cms": {
             "extension-key": "easycaptcha"
         }
+    },
+    "scripts" : {
+        "extension-build": "@composer install -d Resources/Private/Php/Composer"
     }
 }
