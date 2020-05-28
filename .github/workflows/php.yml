@@ -17,8 +17,8 @@ jobs:
           - 7.2
     runs-on: ubuntu-latest
     steps:
-    - name: Validate composer.json and composer.lock
     - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
       run: composer validate
 
     - name: Cache Composer packages
