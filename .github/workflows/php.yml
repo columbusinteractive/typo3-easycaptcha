@@ -39,12 +39,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Install dependencies
+    - name: Install dependencies & Upload to TER
       # if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer extension-build
-
-    - name: Upload to TER
       run: |
+        composer extension-build
         composer require helhum/ter-client
         composer ter-client upload easycaptcha . -u "$TER_LOGIN" -p "$TER_PASSWORD"
 
