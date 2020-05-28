@@ -46,7 +46,7 @@ jobs:
         TAG_NAME: ${{ github.ref }}
       run: |
         composer global require helhum/ter-client
-        $HOME/.composer/vendor/bin/ter-client upload easycaptcha . -u $TER_LOGIN -p $TER_PASSWORD -m $TAG_NAME
+        $HOME/.composer/vendor/bin/ter-client -u $TER_LOGIN -p $TER_PASSWORD -m $TAG_NAME upload easycaptcha .
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
