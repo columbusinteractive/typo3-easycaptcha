@@ -45,7 +45,7 @@ jobs:
     - name: Upload to TER
       run: |
         composer global require helhum/ter-client
-        ter-client upload easycaptcha . -u "$TER_LOGIN" -p "$TER_PASSWORD"
+        composer ter-client upload easycaptcha . -u "$TER_LOGIN" -p "$TER_PASSWORD"
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
