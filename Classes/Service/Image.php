@@ -15,10 +15,18 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 call_user_func(static function () {
-    $classLoader = require dirname(__DIR__, 6) . '/vendor/autoload.php';
-    SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
-    Bootstrap::init($classLoader);
 
+    $isComposerMode = defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE;
+    
+    if(!$isComposerMode) {
+        $classLoader = require dirname(__DIR__, 5) . '/typo3_src/vendor/autoload.php';
+        SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        Bootstrap::init($classLoader);
+    } else {
+        $classLoader = require dirname(__DIR__, 6) . '/vendor/autoload.php';
+        SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        Bootstrap::init($classLoader);
+    }
 
     $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
         ->getQueryBuilderForTable('tt_content');
@@ -64,12 +72,16 @@ call_user_func(static function () {
     $formConfiguration = $yamlLoader->load($file->getPublicUrl());
     $captchaProperties = null;
     foreach ($formConfiguration['renderables'] as $renderable) {
-        foreach ($renderable['renderables'] as $element) {
-            if ($element['identifier'] === $_GET['identifier']) {
-                $captchaProperties = $element['properties'];
+        if (isset($renderable['renderables'])) {
+            foreach ($renderable['renderables'] as $element) {
+                if ($element['identifier'] === $_GET['identifier']) {
+                    $captchaProperties = $element['properties'];
+                }
             }
         }
     }
+
+    
 
     if ($captchaProperties === null) {
         throw ElemenIdentifierNotFoundInForm::make('Unable to find a form element with the given identifier: ' . htmlspecialchars($_GET['identifier']));
