@@ -24,10 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Validate composer.json and composer.lock
-      env:
-        TER_LOGIN: ${{ secrets.TER_LOGIN }}
-        TER_PASSWORD: ${{ secrets.TER_PASSWORD }}
-        TAG_NAME: ${{ github.ref }}
       run: composer validate
 
     - name: Cache Composer packages
@@ -44,6 +40,10 @@ jobs:
       run: composer extension-build
 
     - name: Upload to TER
+      env:
+        TER_LOGIN: ${{ secrets.TER_LOGIN }}
+        TER_PASSWORD: ${{ secrets.TER_PASSWORD }}
+        TAG_NAME: ${{ github.ref }}
       run: |
         composer global require helhum/ter-client
         echo $TER_LOGIN
