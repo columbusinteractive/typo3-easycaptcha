@@ -7,10 +7,13 @@
 An easy to use extension which enables you to use captchas in the TYPO3 form extension or in your 
 custom extension without the need for 3rd party services
 
-## Installation via Composer
+## Installation via Composer (recommended)
 ```shell
 composer require columbusinteractive/typo3-easycaptcha
 ```
+## Installation via download on TER (for non composer based installations)
+https://extensions.typo3.org/extension/easycaptcha/
+
 
 ## How it works
 Under the hood this extension makes use of the fantastic ``laminas/laminas-captcha`` library. This extension
