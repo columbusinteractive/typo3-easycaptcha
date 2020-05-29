@@ -14,15 +14,15 @@ use TYPO3\CMS\Core\Database\Query\Restriction\FrontendWorkspaceRestriction;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-call_user_func(static function () {
+(static function () {
 
-    $isComposerMode = defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE;
-    
-    if(!$isComposerMode) {
+    if (file_exists(dirname(__DIR__, 5) . '/typo3_src/vendor/autoload.php')) {
+        // Non composer mode
         $classLoader = require dirname(__DIR__, 5) . '/typo3_src/vendor/autoload.php';
         SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
         Bootstrap::init($classLoader);
     } else {
+        // Composer mode
         $classLoader = require dirname(__DIR__, 6) . '/vendor/autoload.php';
         SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
         Bootstrap::init($classLoader);
@@ -81,7 +81,7 @@ call_user_func(static function () {
         }
     }
 
-    
+
 
     if ($captchaProperties === null) {
         throw ElemenIdentifierNotFoundInForm::make('Unable to find a form element with the given identifier: ' . htmlspecialchars($_GET['identifier']));
@@ -105,4 +105,4 @@ call_user_func(static function () {
     $im = imagecreatefrompng($fileWithoutSuffix . $captcha->getCaptcha()->getSuffix());
     imagepng($im);
     imagedestroy($im);
-});
+})();

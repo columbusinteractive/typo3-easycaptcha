@@ -5,16 +5,15 @@ use ColumbusInteractive\EasyCaptcha\Service\Captcha;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 
-call_user_func(static function () {
-    $isComposerMode = defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE;
-    
-    $isComposerMode = defined('TYPO3_COMPOSER_MODE') && TYPO3_COMPOSER_MODE;
-    
-    if(!$isComposerMode) {
+(static function () {
+
+    if (file_exists(dirname(__DIR__, 5) . '/typo3_src/vendor/autoload.php')) {
+        // Non composer mode
         $classLoader = require dirname(__DIR__, 5) . '/typo3_src/vendor/autoload.php';
         SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
         Bootstrap::init($classLoader);
     } else {
+        // Composer mode
         $classLoader = require dirname(__DIR__, 6) . '/vendor/autoload.php';
         SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
         Bootstrap::init($classLoader);
@@ -26,4 +25,4 @@ call_user_func(static function () {
     echo json_encode([
         'word' => implode(' ', str_split($captcha->getCaptcha()->getWord()))
     ]);
-});
+})();
