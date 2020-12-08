@@ -1,9 +1,4 @@
 # TYPO3 - Easy Captcha (image based)
-[![Latest Stable Version](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/v/stable)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
-[![Monthly Downloads](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/d/monthly)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
-[![Total Downloads](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/downloads)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
-[![License](https://poser.pugx.org/columbusinteractive/typo3-easycaptcha/license.svg)](https://packagist.org/packages/columbusinteractive/typo3-easycaptcha)
- 
 An easy to use extension which enables you to use captchas in the TYPO3 form extension
 
 ## Installation via Composer
