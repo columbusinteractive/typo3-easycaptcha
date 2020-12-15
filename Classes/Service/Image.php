@@ -28,7 +28,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         file_exists(dirname($_SERVER['DOCUMENT_ROOT'], 1) . '/composer.json')) {
         $composerConfig = json_decode(file_get_contents(
             dirname($_SERVER['DOCUMENT_ROOT'], 1) . '/composer.json'
-        ), true, 512, JSON_THROW_ON_ERROR);
+        ), true);
 
         if (isset($composerConfig['config']['vendor-dir'])) {
             $classLoader = require dirname(__DIR__, 6) . '/' . $composerConfig['config']['vendor-dir'] . '/autoload.php';
@@ -42,6 +42,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         throw new RuntimeException('Unable to find composer vendor dir! Autoload failed.');
     }
 
+
+    $context = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
+    assert($context instanceof \TYPO3\CMS\Core\Context\Context);
+    $languageAspect = $context->getAspect('language');
+    assert($languageAspect instanceof \TYPO3\CMS\Core\Context\LanguageAspect);
+    $sys_language_uid = $languageAspect->getId();
 
     $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
         ->getQueryBuilderForTable('tt_content');
@@ -57,6 +63,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         ->from('tt_content')
         ->andWhere($queryBuilder->expr()->andX(
             $queryBuilder->expr()->eq(
+                'sys_language_uid',
+                $queryBuilder->createNamedParameter($sys_language_uid, PDO::PARAM_INT)
+            ),
+            $queryBuilder->expr()->eq(
                 'pid',
                 $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
             ),
@@ -68,12 +78,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
     $result = $statement->fetch();
 
+
     if ($result === false) {
         throw MissingFormElement::make('Unable to find a form element for the given pid: ' . (int)$_GET['pid']);
     }
 
     $flexFormArray = GeneralUtility::xml2array($result['pi_flexform']);
     $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+
     /** @var \TYPO3\CMS\Core\Resource\File $file */
     $file = $resourceFactory->retrieveFileOrFolderObject(
         $flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']
@@ -82,10 +94,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
     if (!$file instanceof \TYPO3\CMS\Core\Resource\File) {
         throw UnableToLoadFormConfiguration::make('Unable to load: ' . $flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
     }
-
     $yamlLoader = new YamlFileLoader();
     $formConfiguration = $yamlLoader->load($file->getPublicUrl());
     $captchaProperties = null;
+
     foreach ($formConfiguration['renderables'] as $renderable) {
         if (isset($renderable['renderables'])) {
             foreach ($renderable['renderables'] as $element) {

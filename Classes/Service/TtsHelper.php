@@ -14,12 +14,12 @@ use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
         SystemEnvironmentBuilder::run(5, SystemEnvironmentBuilder::REQUESTTYPE_FE);
         Bootstrap::init($classLoader);
 
-        // Custom vendor dir
+    // Custom vendor dir
     } else if (isset($_SERVER['DOCUMENT_ROOT']) &&
         file_exists(dirname($_SERVER['DOCUMENT_ROOT'], 1) . '/composer.json')) {
         $composerConfig = json_decode(file_get_contents(
             dirname($_SERVER['DOCUMENT_ROOT'], 1) . '/composer.json'
-        ), true, 512, JSON_THROW_ON_ERROR);
+        ), true);
 
         if (isset($composerConfig['config']['vendor-dir'])) {
             $classLoader = require dirname(__DIR__, 6) . '/' . $composerConfig['config']['vendor-dir'] . '/autoload.php';
@@ -38,5 +38,5 @@ use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
     header('Content-Type: application/json');
     echo json_encode([
         'word' => implode(' ', str_split($captcha->getCaptcha()->getWord()))
-    ], JSON_THROW_ON_ERROR);
+    ]);
 })();
