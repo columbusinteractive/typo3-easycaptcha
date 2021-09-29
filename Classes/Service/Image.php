@@ -75,6 +75,45 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
                 $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
             )
         ))->execute();
+            
+        $statement = $queryBuilder
+        ->select('pi_flexform')
+        ->from('tt_content');
+
+        $result = $statement->andWhere(
+            $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq(
+                    'sys_language_uid',
+                    $queryBuilder->createNamedParameter($sys_language_uid, PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'pid',
+                    $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'CType',
+                    $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
+                )
+            ))->execute()->fetch();
+
+        if (empty($res)) {
+            $result = $statement->orWhere(
+            $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->eq(
+                    'sys_language_uid',
+                    $queryBuilder->createNamedParameter(-1, PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'pid',
+                    $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'CType',
+                    $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
+                )
+            ))->execute()->fetch();;
+        }
+
 
     $result = $statement->fetch();
 
