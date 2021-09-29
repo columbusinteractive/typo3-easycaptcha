@@ -57,24 +57,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         ->removeAll()
         ->add(GeneralUtility::makeInstance(DeletedRestriction::class))
         ->add(GeneralUtility::makeInstance(FrontendWorkspaceRestriction::class));
-
-    $statement = $queryBuilder
-        ->select('pi_flexform')
-        ->from('tt_content')
-        ->andWhere($queryBuilder->expr()->andX(
-            $queryBuilder->expr()->eq(
-                'sys_language_uid',
-                $queryBuilder->createNamedParameter($sys_language_uid, PDO::PARAM_INT)
-            ),
-            $queryBuilder->expr()->eq(
-                'pid',
-                $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
-            ),
-            $queryBuilder->expr()->eq(
-                'CType',
-                $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
-            )
-        ))->execute();
             
         $statement = $queryBuilder
         ->select('pi_flexform')
@@ -113,8 +95,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
                 )
             ))->execute()->fetch();;
         }
-
-
     $result = $statement->fetch();
 
 
