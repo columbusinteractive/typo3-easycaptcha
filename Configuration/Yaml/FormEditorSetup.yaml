@@ -85,7 +85,7 @@ TYPO3:
         formElementMixins:
           EasyCaptchaMixin:
             __inheritances:
-              10: 'TYPO3.CMS.Form.mixins.formElementMixins.FormElementMixin'
+              # 10: 'TYPO3.CMS.Form.mixins.formElementMixins.FormElementMixin'
             formEditor:
               editors:
                 900:
