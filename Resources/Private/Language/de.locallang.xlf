@@ -12,8 +12,8 @@
                 <target>Der eingegebene Wert stimmt nicht überein, bitte versuchen Sie es erneut.</target>
             </trans-unit>
             <trans-unit id="playButton" xml:space="preserve">
-                <source>Play the generated word.</source>
-                <target>Das generierte Word abspielen</target>
+                <source>Read out the generated word.</source>
+                <target>Das generierte Wort vorlesen</target>
             </trans-unit>
             <trans-unit id="refreshButton" xml:space="preserve">
                 <source>Generate a new captcha image.</source>
