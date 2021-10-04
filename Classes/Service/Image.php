@@ -145,9 +145,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
     // Generate captcha
     $path = Captcha::getPublicCaptchaPath() . '/' . $captcha->getCaptcha()->generate() . $captcha->getCaptcha()->getSuffix();
 
-    // Write JS File for text to speech
-    file_put_contents(Captcha::getPublicCaptchaPath() . '/tts.mjs', 'export function tts() { return "' . $captcha->getCaptcha()->getWord() . '" }');
-
     // Emit image
     header('Content-Type: image/png');
     $im = imagecreatefrompng($path);
