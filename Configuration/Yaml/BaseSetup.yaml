@@ -13,6 +13,8 @@ TYPO3:
               implementationClassName: 'ColumbusInteractive\EasyCaptcha\Domain\Model\FormElements\EasyCaptcha'
               properties:
                 containerClassAttribute: 'easycaptcha'
+                fluidAdditionalAttributes:
+                  autocomplete: 'off'
 
           validatorsDefinition:
             Easycaptcha:
