@@ -6,8 +6,8 @@
         "ext-gd": "*",
         "ext-json": "*",
         "php": "^7.2",
-        "typo3/cms-core": "^9.5 || ^10.4 || ^11.4",
-        "typo3/cms-form": "^9.5 || ^10.4 || ^11.4",
+        "typo3/cms-core": "^11.5",
+        "typo3/cms-form": "^11.5",
         "laminas/laminas-captcha": "^2.9",
         "laminas/laminas-validator": "^2.13.0",
         "laminas/laminas-session": "^2.9.0"
