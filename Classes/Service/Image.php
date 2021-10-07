@@ -150,5 +150,4 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
     $im = imagecreatefrompng($path);
     imagepng($im);
     imagedestroy($im);
-    unlink($path);
 })();
