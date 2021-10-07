@@ -115,12 +115,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         ->setFontSize($captchaProperties['fontSize']);
 
     // Generate captcha
-    $fileWithoutSuffix = $captcha::getPublicCaptchaPath() . '/' . $captcha->getCaptcha()->generate();
+    $path = Captcha::getPublicCaptchaPath() . '/' . $captcha->getCaptcha()->generate() . $captcha->getCaptcha()->getSuffix();
 
-    // Write JS File for text to speech
-    file_put_contents($captcha::getPublicCaptchaPath() . '/tts.mjs', 'export function tts() { return "' . $captcha->getCaptcha()->getWord() . '" }');
+    // Emit image
     header('Content-Type: image/png');
-    $im = imagecreatefrompng($fileWithoutSuffix . $captcha->getCaptcha()->getSuffix());
+    $im = imagecreatefrompng($path);
     imagepng($im);
     imagedestroy($im);
 })();
