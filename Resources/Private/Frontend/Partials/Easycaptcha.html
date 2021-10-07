@@ -8,7 +8,9 @@
         <f:format.raw>
             <easyCaptcha:render/>
             <div class="{element.properties.containerClassAttribute}">
-                <img id="captcha-image" alt="{captchaImageAltAttribute}" src="{captchaImage}?pid={currentPid}&identifier={element.identifier}"/>
+                <img src="{captchaImage}?pid={currentPid}&amp;identifier={element.identifier}"
+                     alt="{captchaImageAltAttribute}" id="captcha-image" loading="lazy"
+                     width="{element.properties.width}" height="{element.properties.height}">
             </div>
             <div class="captcha-actions">
                 <f:if condition="{element.properties.enableTts} == true">
