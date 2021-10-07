@@ -3,9 +3,6 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-04-24T08:00:00Z" product-name="easycaptcha">
 		<header/>
 		<body>
-			<trans-unit id="captchaLabel" xml:space="preserve">
-				<source>Please enter the text visible in the image above.</source>
-			</trans-unit>
 			<trans-unit id="captchaError" xml:space="preserve">
 				<source>The entered value does not match, please try again.</source>
 			</trans-unit>

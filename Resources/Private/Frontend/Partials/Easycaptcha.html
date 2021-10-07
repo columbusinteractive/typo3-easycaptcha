@@ -4,84 +4,70 @@
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers">
 <formvh:renderRenderable renderable="{element}">
-    <f:render arguments="{element: element}" contentAs="elementContent" partial="Field/Field">
-        <f:format.raw>
-            <easyCaptcha:render/>
-            <div class="{element.properties.containerClassAttribute}">
-                <img src="{captchaImage}?pid={currentPid}&amp;identifier={element.identifier}"
-                     alt="{captchaImageAltAttribute}" id="captcha-image" loading="lazy"
-                     width="{element.properties.width}" height="{element.properties.height}">
-            </div>
-            <div class="captcha-actions">
-                <f:if condition="{element.properties.enableTts} == true">
-                    <button id="tts-play" type="button" title="{f:translate(key: 'playButton', extensionName: 'easycaptcha')}">
-                        <core:icon identifier="actions-play" size="small" alternativeMarkupIdentifier="inline" />
-                    </button>
-                </f:if>
-                <button id="refresh-button" type="button" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}">
-                    <core:icon identifier="actions-refresh" size="small" alternativeMarkupIdentifier="inline" />
+    <f:format.raw>
+        <easyCaptcha:render/>
+        <div class="{element.properties.containerClassAttribute}">
+            <img src="{captchaImage}?pid={currentPid}&amp;identifier={element.identifier}"
+                 alt="{captchaImageAltAttribute}" id="captcha-image" loading="lazy"
+                 width="{element.properties.width}" height="{element.properties.height}">
+        </div>
+        <div class="captcha-actions">
+            <f:if condition="{element.properties.enableTts} == true">
+                <button id="tts-play" type="button" title="{f:translate(key: 'playButton', extensionName: 'easycaptcha')}">
+                    <core:icon identifier="actions-play" size="small" alternativeMarkupIdentifier="inline" />
                 </button>
-            </div>
-            <div class="form-group">
-                <label class="control-label">
-                    <f:translate key="LLL:EXT:easycaptcha/Resources/Private/Language/locallang.xlf:captchaLabel"/>
-                </label>
-                <f:form.textfield
-                    additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
-                    class="form-control"
-                    errorClass="{element.properties.elementErrorClassAttribute}"
-                    id="{element.uniqueIdentifier}"
-                    property="{element.identifier}"
-                    value=""
-                />
-            </div>
-        </f:format.raw>
-        <style type="text/css">
-            .captcha-actions {
-                margin-top: 10px;
-            }
+            </f:if>
+            <button id="refresh-button" type="button" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}">
+                <core:icon identifier="actions-refresh" size="small" alternativeMarkupIdentifier="inline" />
+            </button>
+        </div>
+        <f:render partial="Text" arguments="{element: element}" />
+    </f:format.raw>
+    <style type="text/css">
+        .captcha-actions {
+            margin-top: 10px;
+        }
 
-            .captcha-actions button svg {
-                width: 16px;
-                height: 16px;
-            }
-        </style>
+        .captcha-actions button svg {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
 
-        <script type="application/javascript">
-            (function() {
-                var captcha_challenge = document.getElementById('captcha-image');
-                var captcha_challenge_url = captcha_challenge.src;
+    <script type="application/javascript">
+        (function() {
+            var captcha_challenge = document.getElementById('captcha-image');
+            var captcha_challenge_url = captcha_challenge.src;
 
-                var refresh_button = document.getElementById('refresh-button');
-                refresh_button.addEventListener('click', function () {
-                    captcha_challenge.src = captcha_challenge_url + '&t=' + new Date().getTime();
+            var refresh_button = document.getElementById('refresh-button');
+            refresh_button.addEventListener('click', function () {
+                captcha_challenge.src = captcha_challenge_url + '&t=' + new Date().getTime();
+            });
+
+            var tts_button = document.getElementById('tts-play');
+            if (window.speechSynthesis && window.SpeechSynthesisUtterance && window.fetch) {
+                tts_button.addEventListener('click', function () {
+                    fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>')
+                        .then(function (response) {
+                            if (! response.ok) {
+                                var error = new Error('HTTP error [' + response.status + '] in easycaptcha-request');
+                                console.log(error, response);
+                                throw error;
+                            }
+
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            let utterance = new window.SpeechSynthesisUtterance(data.word);
+                            utterance.rate = 0.8;
+                            utterance.pitch = 1;
+                            window.speechSynthesis.speak(utterance);
+                        });
                 });
-
-                var tts_button = document.getElementById('tts-play');
-                if (window.speechSynthesis && window.SpeechSynthesisUtterance && window.fetch) {
-                    tts_button.addEventListener('click', function () {
-                        fetch('<f:format.raw>{ttsHelperPath}</f:format.raw>')
-                            .then(function (response) {
-                                if (! response.ok) {
-                                    var error = new Error('HTTP error [' + response.status + '] in easycaptcha-request');
-                                    console.log(error, response);
-                                    throw error;
-                                }
-
-                                return response.json();
-                            })
-                            .then(function (data) {
-                                let utterance = new window.SpeechSynthesisUtterance(data.word);
-                                utterance.rate = 0.8;
-                                utterance.pitch = 1;
-                                window.speechSynthesis.speak(utterance);
-                            });
-                    });
-                } else {
-                    tts_button.style.display = 'none';
-                }
-            })();
-        </script>
-    </f:render>
+            } else {
+                tts_button.style.display = 'none';
+            }
+        })();
+    </script>
 </formvh:renderRenderable>
 </html>
