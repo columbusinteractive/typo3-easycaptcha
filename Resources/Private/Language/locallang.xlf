@@ -10,7 +10,7 @@
 				<source>The entered value does not match, please try again.</source>
 			</trans-unit>
 			<trans-unit id="playButton" xml:space="preserve">
-				<source>Play the generated word.</source>
+				<source>Read out the generated word.</source>
 			</trans-unit>
 			<trans-unit id="refreshButton" xml:space="preserve">
                 <source>Generate a new captcha image.</source>
