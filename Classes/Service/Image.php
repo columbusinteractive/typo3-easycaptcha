@@ -29,29 +29,30 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
         ->removeAll()
         ->add(GeneralUtility::makeInstance(DeletedRestriction::class))
         ->add(GeneralUtility::makeInstance(FrontendWorkspaceRestriction::class));
-            
-        $statement = $queryBuilder
+
+    $statement = $queryBuilder
         ->select('pi_flexform')
         ->from('tt_content');
 
-        $result = $statement->andWhere(
-            $queryBuilder->expr()->andX(
-                $queryBuilder->expr()->eq(
-                    'sys_language_uid',
-                    $queryBuilder->createNamedParameter($sys_language_uid, PDO::PARAM_INT)
-                ),
-                $queryBuilder->expr()->eq(
-                    'pid',
-                    $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
-                ),
-                $queryBuilder->expr()->eq(
-                    'CType',
-                    $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
-                )
-            ))->execute()->fetch();
+    $result = $statement->andWhere(
+        $queryBuilder->expr()->andX(
+            $queryBuilder->expr()->eq(
+                'sys_language_uid',
+                $queryBuilder->createNamedParameter($sys_language_uid, PDO::PARAM_INT)
+            ),
+            $queryBuilder->expr()->eq(
+                'pid',
+                $queryBuilder->createNamedParameter((int)$_GET['pid'], PDO::PARAM_INT)
+            ),
+            $queryBuilder->expr()->eq(
+                'CType',
+                $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
+            )
+        )
+    )->execute()->fetch();
 
-        if (empty($res)) {
-            $result = $statement->orWhere(
+    if (empty($result)) {
+        $result = $statement->orWhere(
             $queryBuilder->expr()->andX(
                 $queryBuilder->expr()->eq(
                     'sys_language_uid',
@@ -65,10 +66,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
                     'CType',
                     $queryBuilder->createNamedParameter('form_formframework', PDO::PARAM_STR)
                 )
-            ))->execute()->fetch();;
-        }
-    $result = $statement->fetch();
-
+            )
+        )->execute()->fetch();
+    }
 
     if ($result === false) {
         throw MissingFormElement::make('Unable to find a form element for the given pid: ' . (int)$_GET['pid']);
