@@ -13,8 +13,7 @@
         "laminas/laminas-session": "^2.9.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "codeception/codeception": "^4.1"
+        "roave/security-advisories": "dev-master"
     },
     "license": "MIT",
     "homepage": "https://github.com/columbusinteractive/typo3-easycaptcha",
