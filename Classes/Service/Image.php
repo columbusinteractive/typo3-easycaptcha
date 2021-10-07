@@ -85,8 +85,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
     if (!$file instanceof \TYPO3\CMS\Core\Resource\File) {
         throw UnableToLoadFormConfiguration::make('Unable to load: ' . $flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
     }
+
     $yamlLoader = new YamlFileLoader();
-    $formConfiguration = $yamlLoader->load($file->getPublicUrl());
+    $formConfiguration = $yamlLoader->load($flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
     $captchaProperties = null;
 
     foreach ($formConfiguration['renderables'] as $renderable) {
