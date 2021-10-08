@@ -15,6 +15,9 @@ TYPO3:
                 containerClassAttribute: 'easycaptcha'
                 fluidAdditionalAttributes:
                   autocomplete: 'off'
+                  required: 'required'
+              validators:
+                - identifier: 'NotEmpty'
 
           validatorsDefinition:
             Easycaptcha:
