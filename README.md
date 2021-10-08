@@ -34,6 +34,19 @@ The captcha field can be styled with the following CSS classes:
 
 By default, bootstrap classes are also added for the form field. If you don't use bootstrap, simply ignore them.
 
+## JS API
+Tha JavaScript API can be accessed using `window.easycaptcha`.
+
+Available functions:
+```ts
+easycaptcha.init(id: string|HTMLElement): void;
+easycaptcha.initAll(): void;
+easycaptcha.reload(id: string|HTMLElement): void;
+easycaptcha.tts(id: string|HTMLElement): Promise;
+easycaptcha.get(id: string|HTMLElement): HTMLElement;
+easycaptcha.getAll(): HTMLCollection;
+```
+
 ## Demo
 We're using the captcha on our corporate website  for the contact form.  
 https://www.columbus-interactive.de/kontakt
