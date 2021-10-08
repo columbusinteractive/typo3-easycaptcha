@@ -8,8 +8,12 @@ use ColumbusInteractive\EasyCaptcha\Service\Captcha;
 
     $captcha = Captcha::getInstance();
 
+    $word = $captcha->getCaptcha()->getWord();
+
     header('Content-Type: application/json');
     echo json_encode([
-        'word' => implode(' ', str_split($captcha->getCaptcha()->getWord()))
+        'word' => $word !== null
+            ? implode(' ', str_split($word))
+            : null,
     ]);
 })();
