@@ -1,0 +1,23 @@
+.easycaptcha__image {
+    max-width: 100%;
+    border: 1px #000000 solid;
+}
+
+.easycaptcha__actions {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.easycaptcha__actions button {
+    background: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0.375em;
+    border: 1px #000000 solid;
+}
+
+.easycaptcha__actions svg {
+    display: block;
+    width: 1.125em;
+    height: 1.125em;
+}
