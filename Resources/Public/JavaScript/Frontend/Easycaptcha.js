@@ -112,10 +112,10 @@
                     throw new Error('HTTP error [' + response.status + '] for captcha tts request');
                 }
 
-                return response.json().word;
+                return response.json();
             })
-            .then(function (word) {
-                var utterance = new SpeechSynthesisUtterance(word);
+            .then(function (data) {
+                var utterance = new SpeechSynthesisUtterance(data.word);
                 utterance.rate = 0.8;
                 utterance.pitch = 1;
                 speechSynthesis.speak(utterance);

@@ -87,7 +87,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
     }
 
     $yamlLoader = new YamlFileLoader();
-    $formConfiguration = $yamlLoader->load($flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
+    $formConfiguration = $yamlLoader->load($file->getPublicUrl());
     $captchaProperties = null;
 
     foreach ($formConfiguration['renderables'] as $renderable) {
@@ -99,8 +99,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
             }
         }
     }
-
-
 
     if ($captchaProperties === null) {
         throw ElemenIdentifierNotFoundInForm::make('Unable to find a form element with the given identifier: ' . htmlspecialchars($_GET['identifier']));
