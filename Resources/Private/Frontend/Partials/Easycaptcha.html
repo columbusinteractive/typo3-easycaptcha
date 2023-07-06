@@ -9,20 +9,16 @@
     <div class="easycaptcha" id="{element.uniqueIdentifier}">
         <div class="easycaptcha__challenge">
             <div class="easycaptcha__image-wrapper">
-                <img src="{captchaImage}?pid={currentPid}&amp;identifier={element.identifier}"
-                     alt="{captchaImageAltAttribute}" class="easycaptcha__image" loading="lazy"
-                     width="{element.properties.width}" height="{element.properties.height}">
+                <img src="/easycaptcha/image?pid={currentPid}&amp;identifier={element.identifier}"  alt="{captchaImageAltAttribute}" class="easycaptcha__image" width="{element.properties.width}" height="{element.properties.height}" />
             </div>
 
             <div class="easycaptcha__actions">
                 <f:if condition="{element.properties.enableTts} == true">
-                    <button type="button" title="{f:translate(key: 'playButton', extensionName: 'easycaptcha')}"
-                            class="easycaptcha__action-tts" style="display: none;" data-tts-url="{ttsHelperPath}">
+                    <button type="button" title="{f:translate(key: 'playButton', extensionName: 'easycaptcha')}" class="easycaptcha__action-tts" style="display: none;" data-tts-url="/easycaptcha/tts">
                         <core:icon identifier="actions-play" size="small" alternativeMarkupIdentifier="inline" />
                     </button>
                 </f:if>
-                <button type="button" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}"
-                        class="easycaptcha__action-reload" style="display: none;">
+                <button type="button" title="{f:translate(key: 'refreshButton', extensionName: 'easycaptcha')}" class="easycaptcha__action-reload" style="display: none;">
                     <core:icon identifier="actions-refresh" size="small" alternativeMarkupIdentifier="inline" />
                 </button>
             </div>

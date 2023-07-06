@@ -20,4 +20,4 @@ TYPO3:
 
           validatorsDefinition:
             Easycaptcha:
-              implementationClassName: 'ColumbusInteractive\EasyCaptcha\Validation\Validator\EasyCaptcha'
+              implementationClassName: 'ColumbusInteractive\EasyCaptcha\Validation\Validator\EasyCaptchaValidator'

@@ -14,16 +14,6 @@ final class RenderViewHelper extends AbstractFormFieldViewHelper
     {
         /** @var TypoScriptFrontendController $tsfe */
         $tsfe = $GLOBALS['TSFE'];
-        $captchaService = Captcha::getInstance();
-
-        $this->templateVariableContainer->add('captchaImage',
-            PathUtility::getAbsoluteWebPath($captchaService->getDynamicImagePublicPath()));
-        $this->templateVariableContainer->add('ttsHelperPath',
-            PathUtility::getAbsoluteWebPath($captchaService->getTtsHelperPublicPath()));
-        $this->templateVariableContainer->add('captchaImageAltAttribute',
-            $captchaService->getCaptcha()->getImgAlt());
-        $this->templateVariableContainer->add('publicCaptchaPath',
-            PathUtility::getAbsoluteWebPath($captchaService::getPublicCaptchaPath()));
         $this->templateVariableContainer->add('currentPid', $tsfe->getRequestedId());
     }
 }
