@@ -58,15 +58,11 @@ class EasyCaptcha implements MiddlewareInterface
 
             // Generate captcha
             $path = $captchaPath . '/' . $captcha->generate() . $captcha->getSuffix();
-
-            $im = imagecreatefrompng($path);
-            $stream = fopen('php://memory','r+');
-            imagepng($im, $stream);
-            rewind($stream);
+            $im = file_get_contents($path);
 
             // render captcha image
             $response = $this->responseFactory->createResponse()->withHeader('Content-Type', 'image/png');
-            $response->getBody()->write(stream_get_contents($stream));
+            $response->getBody()->write($im);
 
             return $response;
         }
