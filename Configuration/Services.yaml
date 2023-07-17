@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  ColumbusInteractive\EasyCaptcha\:
+    resource: '../Classes/*'
+
+  ColumbusInteractive\EasyCaptcha\Middleware\EasyCaptcha:
+    public: true

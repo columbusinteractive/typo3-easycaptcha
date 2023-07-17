@@ -15,6 +15,10 @@
                 <source>Generate a new captcha image.</source>
                 <target>Neues Captcha generieren</target>
             </trans-unit>
+			<trans-unit id="captchaImageAltAttribute" xml:space="preserve">
+                <source>Captcha image</source>
+                <target>Captcha Grafik</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

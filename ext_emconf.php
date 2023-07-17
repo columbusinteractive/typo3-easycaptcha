@@ -8,10 +8,10 @@ $EM_CONF['easycaptcha'] = [
     'author_email' => 'hello@columbus-interactive.de',
     'author_company' => 'Columbus Interactive GmbH',
     'state' => 'stable',
-    'version' => '1.3.1',
+    'version' => '3.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-10.4.99',
+            'typo3' => '12.4.0-12.4.99',
         ],
     ],
 ];
