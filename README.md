@@ -1,3 +1,13 @@
+## ⚠️ Project Status Notice
+
+**This TYPO3 extension is no longer actively maintained.**  
+We do not plan to update it for future TYPO3 releases, and no further development or support is scheduled.<br />
+<br />
+If you're looking for an alternative, we recommend using [bw_captcha](https://github.com/maikschneider/bw_captcha), which offers similar functionality.<br />
+<br />
+Thank you to everyone who has used this extension and contributed to its development.
+<br /><br />
+
 # TYPO3 - Easy Captcha (image based)
 An easy to use extension which enables you to use captchas in the TYPO3 form extension
 
