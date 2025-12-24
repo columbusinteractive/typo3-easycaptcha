@@ -8,15 +8,12 @@ use Laminas\Captcha\Image;
 use Laminas\Session\Config\SessionConfig;
 use Laminas\Session\Container;
 use Laminas\Session\SessionManager;
-use Laminas\Session\Config\StandardConfig;
-use Laminas\Session\Storage\SessionStorage;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Database\Query\Restriction\WorkspaceRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
-use TYPO3\CMS\Core\Database\Query\Restriction\FrontendWorkspaceRestriction;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 use ColumbusInteractive\EasyCaptcha\Exceptions\ElemenIdentifierNotFoundInForm;
 use ColumbusInteractive\EasyCaptcha\Exceptions\MissingFormElement;
 use ColumbusInteractive\EasyCaptcha\Exceptions\UnableToLoadFormConfiguration;
@@ -28,7 +25,7 @@ final class Captcha
     /** @var Image */
     private $captcha;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->initialize();
     }
@@ -52,7 +49,7 @@ final class Captcha
                     'name' => 'captcha',
                 ])
         )))));
-    } 
+    }
 
     public function getCaptcha(bool $loadProperties = false): Image
     {
@@ -90,20 +87,20 @@ final class Captcha
         $languageAspect = $context->getAspect('language');
         assert($languageAspect instanceof \TYPO3\CMS\Core\Context\LanguageAspect);
         $sys_language_uid = $languageAspect->getId();
-    
+
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tt_content');
-    
+
         $queryBuilder
             ->getRestrictions()
             ->removeAll()
             ->add(GeneralUtility::makeInstance(DeletedRestriction::class))
-            ->add(GeneralUtility::makeInstance(FrontendWorkspaceRestriction::class));
-    
+            ->add(GeneralUtility::makeInstance(WorkspaceRestriction::class));
+
         $statement = $queryBuilder
             ->select('pi_flexform')
             ->from('tt_content');
-    
+
         $result = $statement->andWhere(
             $queryBuilder->expr()->and(
                 $queryBuilder->expr()->eq(
@@ -119,8 +116,8 @@ final class Captcha
                     $queryBuilder->createNamedParameter('form_formframework', \PDO::PARAM_STR)
                 )
             )
-        )->execute()->fetch();
-    
+        )->executeQuery()->fetchOne();
+
         if (empty($result)) {
             $result = $statement->orWhere(
                 $queryBuilder->expr()->and(
@@ -137,29 +134,25 @@ final class Captcha
                         $queryBuilder->createNamedParameter('form_formframework', \PDO::PARAM_STR)
                     )
                 )
-            )->execute()->fetch();
+            )->executeQuery()->fetchOne();
         }
 
         if ($result === false) {
             throw MissingFormElement::make('Unable to find a form element for the given pid: ' . (int)$_GET['pid']);
         }
-    
-        $flexFormArray = GeneralUtility::xml2array($result['pi_flexform']);
-        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
-    
-        /** @var \TYPO3\CMS\Core\Resource\File $file */
-        $file = $resourceFactory->retrieveFileOrFolderObject(
-            $flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']
-        );
-    
-        if (!$file instanceof \TYPO3\CMS\Core\Resource\File) {
+
+        $flexFormArray = GeneralUtility::xml2array($result);
+
+        $filePath = GeneralUtility::getFileAbsFileName($flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
+
+        if (!file_exists($filePath) ) {
             throw UnableToLoadFormConfiguration::make('Unable to load: ' . $flexFormArray['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF']);
         }
-    
+
         $yamlLoader = new YamlFileLoader();
-        $formConfiguration = $yamlLoader->load($file->getPublicUrl());
+        $formConfiguration = $yamlLoader->load($filePath);
         $captchaProperties = null;
-    
+
         foreach ($formConfiguration['renderables'] as $renderable) {
             if (isset($renderable['renderables'])) {
                 foreach ($renderable['renderables'] as $element) {
@@ -169,7 +162,7 @@ final class Captcha
                 }
             }
         }
-    
+
         if ($captchaProperties === null) {
             throw ElemenIdentifierNotFoundInForm::make('Unable to find a form element with the given identifier: ' . htmlspecialchars($_GET['identifier']));
         }
